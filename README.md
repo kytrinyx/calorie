@@ -11,7 +11,7 @@ In other words, rails is *not* required.
 ## Usage
 
 Create a hash that uses the day of the month as the key.
-The data can be anything, and only your code will be interacting with it.
+The data can be anything; only your code will be interacting with it.
 
       data = {
         1 => thing,
