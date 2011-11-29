@@ -62,6 +62,14 @@ If you don't need to lay it out by week, you can also iterate straight through t
         end
       end
 
+## Configuration
+
+By default the first day of the week is Sunday, however this can be changed to Monday like so:
+
+      Calorie.configuration do |config|
+        config.week_starts_on :monday
+      end
+
 ## TODO
 
 * configurable week start
