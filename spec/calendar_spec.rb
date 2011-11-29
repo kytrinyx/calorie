@@ -20,23 +20,76 @@ describe Calorie::Calendar do
     end
   end
 
-  it "gets the first week right" do
-    numbers = []
-    subject.weeks.first.each_day do |day|
-      numbers << day.number
+  context "with default configuration" do
+    before :each do
+      Calorie.config = nil
     end
-    numbers.should eq([nil, nil, nil] + (1..4).to_a)
+
+    it "gets the first week right" do
+      numbers = []
+      subject.weeks.first.each_day do |day|
+        numbers << day.number
+      end
+      numbers.should eq([nil, nil, nil] + (1..4).to_a)
+    end
+
+    it "gets the last week right" do
+      numbers = []
+      subject.weeks.last.each_day do |day|
+        numbers << day.number
+      end
+      numbers.should eq((26..31).to_a + [nil])
+    end
+
+    it "has labels for the days of the week" do
+      subject.days_of_the_week.should eq(%w(Su Mo Tu We Th Fr Sa))
+    end
   end
 
-  it "gets the last week right" do
-    numbers = []
-    subject.weeks.last.each_day do |day|
-      numbers << day.number
+  context "when week starts on sunday" do
+    before :each do
+      Calorie.config = nil
     end
-    numbers.should eq((26..31).to_a + [nil])
+
+    describe "first day falls on" do
+      {
+        2003 => 2,
+        2004 => 4,
+        2005 => 5,
+        2006 => 6,
+        2007 => 0,
+        2008 => 2
+      }.each do |year, offset|
+        it "#{offset} in #{year}" do
+          cal = Calorie::Calendar.new(year, 4, {})
+          cal.first_day_falls_on.should eq(offset)
+        end
+      end
+    end
   end
 
-  it "has labels for the days of the week" do
-    subject.days_of_the_week.should eq(%w(Su Mo Tu We Th Fr Sa))
+  context "when week starts on monday" do
+    before :each do
+      Calorie.configuration do |config|
+        config.week_starts_on :monday
+      end
+    end
+
+    describe "first day falls on" do
+      {
+        2003 => 3,
+        2004 => 5,
+        2005 => 6,
+        2006 => 0,
+        2007 => 1,
+        2008 => 3
+      }.each do |year, offset|
+        it "#{offset} in #{year}" do
+          cal = Calorie::Calendar.new(year, 5, {})
+          cal.first_day_falls_on.should eq(offset)
+        end
+      end
+    end
   end
+
 end

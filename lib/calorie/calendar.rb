@@ -27,7 +27,11 @@ module Calorie
     end
 
     def first_day_falls_on
-      first_day.wday
+      if Calorie.configuration.week_starts_on?(:monday)
+        (first_day.wday - 1) % 7
+      else
+        first_day.wday
+      end
     end
 
     def initialize_days
@@ -56,7 +60,7 @@ module Calorie
     end
 
     def blank_days_at_start
-      first_day.wday
+      first_day_falls_on
     end
 
     def blank_days_at_end
@@ -72,7 +76,11 @@ module Calorie
     end
 
     def days_of_the_week
-      %w(Su Mo Tu We Th Fr Sa)
+      if Calorie.configuration.week_starts_on? :monday
+        %w(Mo Tu We Th Fr Sa Su)
+      else
+        %w(Su Mo Tu We Th Fr Sa)
+      end
     end
   end
 end

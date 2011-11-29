@@ -16,12 +16,20 @@ describe Calorie::Day do
         Timecop.freeze(Time.new(2010, 6, 13, 11, 40, 17))
       end
 
+      after :each do
+        Timecop.return
+      end
+
       its(:today?) { should be_true }
     end
 
     context "on a different day" do
       before :each do
         Timecop.freeze(Time.new(2010, 6, 14, 20, 15, 47))
+      end
+
+      after :each do
+        Timecop.return
       end
 
       its(:today?) { should be_false }
