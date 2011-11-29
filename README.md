@@ -72,6 +72,5 @@ By default the first day of the week is Sunday, however this can be changed to M
 
 ## TODO
 
-* configurable week start
 * i18n for days of the week
 * add labels for current, previous, and next month (with i18n support)
