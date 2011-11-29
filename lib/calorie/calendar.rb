@@ -76,11 +76,9 @@ module Calorie
     end
 
     def days_of_the_week
-      if Calorie.configuration.week_starts_on? :monday
-        %w(Mo Tu We Th Fr Sa Su)
-      else
-        %w(Su Mo Tu We Th Fr Sa)
-      end
+      days = I18n.translate('calorie.days_of_the_week')
+      days.push(days.shift) if Calorie.configuration.week_starts_on? :monday
+      days
     end
   end
 end

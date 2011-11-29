@@ -1,6 +1,7 @@
 require "calorie/version"
 
 require 'date'
+require 'i18n'
 
 require 'calorie/weeks_in_month'
 require 'calorie/calendar'

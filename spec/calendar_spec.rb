@@ -40,10 +40,6 @@ describe Calorie::Calendar do
       end
       numbers.should eq((26..31).to_a + [nil])
     end
-
-    it "has labels for the days of the week" do
-      subject.days_of_the_week.should eq(%w(Su Mo Tu We Th Fr Sa))
-    end
   end
 
   context "when week starts on sunday" do
@@ -90,6 +86,40 @@ describe Calorie::Calendar do
         end
       end
     end
+  end
+
+  describe "translation" do
+
+    before :each do
+      xx = {
+        :calorie => {
+          :days_of_the_week => ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
+        }
+      }
+      I18n.backend.store_translations(:xx, xx)
+    end
+
+    it "works with default configuration" do
+      Calorie.config = nil
+
+      I18n.with_locale(:xx) do
+        cal = Calorie::Calendar.new(2010, 4, {})
+        cal.days_of_the_week.should eq(%w(dimanche lundi mardi mercredi jeudi vendredi samedi))
+      end
+    end
+
+    it "works when week starts on monday" do
+
+      Calorie.configuration do |config|
+        config.week_starts_on :monday
+      end
+
+      I18n.with_locale(:xx) do
+        cal = Calorie::Calendar.new(2010, 4, {})
+        cal.days_of_the_week.should eq(%w(lundi mardi mercredi jeudi vendredi samedi dimanche))
+      end
+    end
+
   end
 
 end
