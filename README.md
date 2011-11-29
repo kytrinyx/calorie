@@ -2,8 +2,6 @@
 
 A calendar is a calendar is a calendar.
 
-Motivated by the frustration of solving the same problem in a dozen different ugly ways in a dozen different applications.
-
 ## Requirements
 
 This uses the ruby core `Date` library.
@@ -29,7 +27,7 @@ Create a presenter for a month by sending in `year`, `month`, and the data:
 
       cal = Calorie.new(2010, 6, data)
 
-In your view, you can style it however you wish, e.g.:
+In your view, you can style it however you wish.
 
       # previous month, e.g. December 2009
       cal.previous
@@ -41,11 +39,7 @@ In your view, you can style it however you wish, e.g.:
       cal.next
 
       cal.days_of_the_week do |label|
-        if day.weekend?
-          # label styled as a weekend
-        else
-          # label styled as a weekday
-        end
+        label
       end
 
       cal.each_week do |week|
@@ -97,3 +91,6 @@ You will need to add translations for your locale(s). These begin with Sunday, r
       months: ["janv.", "fevr.", "mars", "avr.", "mai", "juin", "juil.", "aout", "sept.", "oct.", "nov.", "dec."]
 
 
+## TODO
+
+* day of the week labels need to be something that can respond to weekend?
