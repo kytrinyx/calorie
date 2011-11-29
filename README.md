@@ -31,6 +31,15 @@ Create a presenter for a month by sending in `year`, `month`, and the data:
 
 In your view, you can style it however you wish, e.g.:
 
+      # previous month, e.g. December 2009
+      cal.previous
+
+      # current month, e.g. January 2010
+      cal.current
+
+      # next month, e.g. February 2010
+      cal.next
+
       cal.days_of_the_week do |label|
         if day.weekend?
           # label styled as a weekend
@@ -50,7 +59,6 @@ In your view, you can style it however you wish, e.g.:
           end
         end
       end
-
 
 If you don't need to lay it out by week, you can also iterate straight through the days (though I'm not sure why you'd use Calorie for this):
 
@@ -78,15 +86,14 @@ You will need to add translations for your locale(s). These begin with Sunday, r
     ---
     calorie:
       days_of_the_week: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+      months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
 
     # fr.yml
     ---
     calorie:
-      days_of_the_week: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"]
+      days_of_the_week: ["di", "lu", "ma", "me", "je", "ve", "sa"]
+      months: ["janv.", "fevr.", "mars", "avr.", "mai", "juin", "juil.", "aout", "sept.", "oct.", "nov.", "dec."]
 
 
-## TODO
-
-* add labels for current, previous, and next month (with i18n support)

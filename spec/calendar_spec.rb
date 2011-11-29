@@ -3,27 +3,8 @@ require 'calorie'
 describe Calorie::Calendar do
   subject { Calorie::Calendar.new(2010, 12, {25 => 'Christmas'}) }
 
-  it "creates all the days" do
-    numbers = []
-    subject.each_day do |day|
-      numbers << day.number
-    end
-
-    numbers.should eq((1..31).to_a)
-  end
-
-  it "hands out the data" do
-    subject.each_day do |day|
-      if day.number == 25
-        day.data.should eq('Christmas')
-      end
-    end
-  end
-
   context "with default configuration" do
-    before :each do
-      Calorie.config = nil
-    end
+    before(:each) { Calorie.config = nil }
 
     it "gets the first week right" do
       numbers = []
@@ -42,10 +23,25 @@ describe Calorie::Calendar do
     end
   end
 
-  context "when week starts on sunday" do
-    before :each do
-      Calorie.config = nil
+  it "creates all the days" do
+    numbers = []
+    subject.each_day do |day|
+      numbers << day.number
     end
+
+    numbers.should eq((1..31).to_a)
+  end
+
+  it "hands out the data" do
+    subject.each_day do |day|
+      if day.number == 25
+        day.data.should eq('Christmas')
+      end
+    end
+  end
+
+  context "when week starts on sunday" do
+    before(:each) { Calorie.config = nil }
 
     describe "first day falls on" do
       {
@@ -89,37 +85,57 @@ describe Calorie::Calendar do
   end
 
   describe "translation" do
+    around :each do |example|
+      I18n.with_locale(:xx) do
+        example.run
+      end
+    end
 
     before :each do
       xx = {
         :calorie => {
-          :days_of_the_week => ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
+          :days_of_the_week => ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
+          :months => ['jan', 'fev', 'mar', 'avr', 'mai', 'jui', 'jui', 'aou', 'sep', 'oct', 'nov', 'dec']
         }
       }
       I18n.backend.store_translations(:xx, xx)
     end
 
-    it "works with default configuration" do
-      Calorie.config = nil
+    describe "monthly labels" do
+      context "in january 2010" do
+        subject { Calorie::Calendar.new(2010, 1, {}) }
 
-      I18n.with_locale(:xx) do
-        cal = Calorie::Calendar.new(2010, 4, {})
-        cal.days_of_the_week.should eq(%w(dimanche lundi mardi mercredi jeudi vendredi samedi))
+        specify { subject.previous.should eq('dec 2009') }
+        specify { subject.current.should eq('jan 2010') }
+      end
+
+      context "in december" do
+        subject { Calorie::Calendar.new(2010, 12, {}) }
+
+        specify { subject.next.should eq('jan 2011') }
       end
     end
 
-    it "works when week starts on monday" do
 
-      Calorie.configuration do |config|
-        config.week_starts_on :monday
+    describe "weekdays" do
+      subject { Calorie::Calendar.new(2010, 4, {}) }
+
+      context "with default configuration" do
+        before(:each) { Calorie.config = nil }
+
+        specify { subject.days_of_the_week.should eq(%w(dimanche lundi mardi mercredi jeudi vendredi samedi)) }
       end
 
-      I18n.with_locale(:xx) do
-        cal = Calorie::Calendar.new(2010, 4, {})
-        cal.days_of_the_week.should eq(%w(lundi mardi mercredi jeudi vendredi samedi dimanche))
+      context "with week starting on monday" do
+        before :each do
+          Calorie.configuration do |config|
+            config.week_starts_on :monday
+          end
+        end
+
+        specify { subject.days_of_the_week.should eq(%w(lundi mardi mercredi jeudi vendredi samedi dimanche)) }
       end
     end
-
   end
 
 end
