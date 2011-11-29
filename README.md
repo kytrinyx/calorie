@@ -52,7 +52,7 @@ In your view, you can style it however you wish, e.g.:
       end
 
 
-If you don't need to lay it out by week, you can also iterate straight through the days:
+If you don't need to lay it out by week, you can also iterate straight through the days (though I'm not sure why you'd use Calorie for this):
 
       cal.each_day do |day|
         # the day of the month is day.number
