@@ -94,4 +94,4 @@ The translations for the week begin with Sunday, regardless of how you configure
 
 ## TODO
 
-* day of the week labels need to be something that can respond to weekend?
+* day of the week labels need to be something that can respond to `weekend?`
