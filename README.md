@@ -73,7 +73,8 @@ By default the first day of the week is Sunday, however this can be changed to M
       end
 
 
-You will need to add translations for your locale(s). These begin with Sunday, regardless of how you configure your week.
+You will need to add translations for your locale(s).
+The translations for the week begin with Sunday, regardless of how you configure your week.
 
 
     # en.yml
