@@ -76,9 +76,15 @@ module Calorie
     end
 
     def days_of_the_week
-      days = I18n.translate('calorie.days_of_the_week')
-      days.push(days.shift) if Calorie.configuration.week_starts_on? :monday
-      days
+      unless @days_of_the_week
+        @days_of_the_week ||= (0..6).map do |i|
+          DayOfTheWeek.new(i)
+        end
+        if Calorie.configuration.week_starts_on? :monday
+          @days_of_the_week.push(@days_of_the_week.shift)
+        end
+      end
+      @days_of_the_week
     end
 
     def previous

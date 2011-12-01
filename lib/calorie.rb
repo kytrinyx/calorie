@@ -4,6 +4,7 @@ require 'date'
 require 'i18n'
 
 require 'calorie/weeks_in_month'
+require 'calorie/day_of_the_week'
 require 'calorie/calendar'
 require 'calorie/week'
 require 'calorie/day'

@@ -123,7 +123,7 @@ describe Calorie::Calendar do
       context "with default configuration" do
         before(:each) { Calorie.config = nil }
 
-        specify { subject.days_of_the_week.should eq(%w(dimanche lundi mardi mercredi jeudi vendredi samedi)) }
+        specify { subject.days_of_the_week.map(&:label).should eq(%w(dimanche lundi mardi mercredi jeudi vendredi samedi)) }
       end
 
       context "with week starting on monday" do
@@ -133,7 +133,7 @@ describe Calorie::Calendar do
           end
         end
 
-        specify { subject.days_of_the_week.should eq(%w(lundi mardi mercredi jeudi vendredi samedi dimanche)) }
+        specify { subject.days_of_the_week.map(&:label).should eq(%w(lundi mardi mercredi jeudi vendredi samedi dimanche)) }
       end
     end
   end

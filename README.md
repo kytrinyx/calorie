@@ -38,8 +38,9 @@ In your view, you can style it however you wish.
       # next month, e.g. February 2010
       cal.next
 
-      cal.days_of_the_week do |label|
-        label
+      cal.days_of_the_week do |day|
+        # day.label
+        # day.weekend?
       end
 
       cal.each_week do |week|
