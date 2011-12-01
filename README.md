@@ -23,6 +23,8 @@ The data can be anything; only your code will be interacting with it.
         # ... etc
       }
 
+Obviously, you don't need to pass in any data -- if it's easy enough to just loop through and check what day it is and do whatever you need to do in your view, that's up to you.
+
 Create a presenter for a month by sending in `year`, `month`, and the data:
 
       cal = Calorie.new(2010, 6, data)
