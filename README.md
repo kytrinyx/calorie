@@ -95,3 +95,47 @@ The translations for the week begin with Sunday, regardless of how you configure
 ## TODO
 
 * day of the week labels need to be something that can respond to `weekend?`
+* week number per ISO 8601
+
+### week number rules:
+
+If 1 January is on a Monday, Tuesday, Wednesday or Thursday, it is in week 01. If 1 January is on a Friday, Saturday or Sunday, it is in week 52 or 53 of the previous year (there is no week 00). 28 December is always in the last week of its year.
+
+There are mutually equivalent descriptions of week 01:
+
+* the week with the year's first Thursday in it (the formal ISO definition),
+* the week with 4 January in it,
+* the first week with the majority (four or more) of its days in the starting year, and
+* the week starting with the Monday in the period 29 December – 4 January.
+
+Her er noen eksempler [1]
+
+4. januar 1993 er en mandag (1993-01-04)
+
+    1993-01-03 → 1992-W53-7
+    1993-01-04 → 1993-W01-1
+
+4. januar 1998 er en søndag (1998-01-04)
+
+    1997-12-28 → 1997-W52-7
+    1997-12-29 → 1998-W01-1
+    1998-01-04 → 1998-W01-7
+
+År starter på en torsdag
+
+    1998-01-01 → 1998-W01-4 (dvs. en torsdag)
+    1998-12-31 → 1998-W53-4 (→skuddårsuke!)
+
+År starter på en onsdag og er skuddår
+
+    1992-01-01 → 1992-W01-3 (dvs. en onsdag)
+    1992-02-29 → 1992-W09-6 (og skuddår)
+    1992-12-31 → 1992-W53-4 (→skuddårsuke)
+
+År starter på en onsdag og året er ikke skuddår
+
+    1975-01-01 → 1975-W01-3 (dvs. en onsdag)
+    1975-02-29 → eksisterer ikke
+    1975-12-28 → 1975-W52-7
+    1975-12-29 → 1976-W01-1 (ikke skuddår i 1975)
+
