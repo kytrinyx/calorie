@@ -20,7 +20,7 @@ module Calorie
     end
 
     def blank?
-      @date.is_a?(NullDay)
+      false
     end
 
     def today?
@@ -32,6 +32,10 @@ module Calorie
     attr_reader :date
     def initialize(date = nil)
       @date = date
+    end
+
+    def blank?
+      true
     end
 
     def sunday?
