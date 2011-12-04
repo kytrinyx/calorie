@@ -54,7 +54,10 @@ describe Calorie::Day do
   end
 end
 
-describe Calorie::NullDate do
+describe Calorie::NullDay do
+  let(:jan1) { Date.new(2010, 1, 1) }
+  subject { Calorie::NullDay.new(jan1) }
+  its(:date) { should eq(jan1) }
   its(:mday) { should be_nil }
   its(:sunday?) { should be_false }
   its(:saturday?) { should be_false }

@@ -1,11 +1,12 @@
 module Calorie
   class Day
 
+    attr_reader :date
     def initialize(date = nil, data = nil)
       if date
         @date = date
       else
-        @date = NullDate.new
+        @date = NullDay.new
       end
       @data = data
     end
@@ -23,7 +24,7 @@ module Calorie
     end
 
     def blank?
-      @date.is_a?(NullDate)
+      @date.is_a?(NullDay)
     end
 
     def today?
@@ -31,7 +32,12 @@ module Calorie
     end
   end
 
-  class NullDate
+  class NullDay
+    attr_reader :date
+    def initialize(date = nil)
+      @date = date
+    end
+
     def sunday?
       false
     end

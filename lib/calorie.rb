@@ -41,7 +41,7 @@ module Calorie
       @config = configuration
     end
 
-    def new(year, month, data)
+    def new(year, month, data = {})
       Calendar.new(year, month, data)
     end
   end

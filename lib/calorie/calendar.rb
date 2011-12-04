@@ -4,7 +4,7 @@ module Calorie
     include WeeksInMonth
 
     attr_reader :days, :weeks, :year, :month, :data
-    def initialize(year, month, data)
+    def initialize(year, month, data = {})
       @data = data
       @year = year
       @month = month
