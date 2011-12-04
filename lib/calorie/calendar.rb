@@ -68,7 +68,7 @@ module Calorie
     end
 
     def blank_days_at_end
-      (blank_days_at_start + days_in_month) % 7
+      7 - ((blank_days_at_start + days_in_month) % 7)
     end
 
     def days_in_month

@@ -1,7 +1,7 @@
 require 'calorie'
 
 describe Calorie::Calendar do
-  subject { Calorie::Calendar.new(2010, 12, {25 => 'Christmas'}) }
+  subject { Calorie::Calendar.new(2007, 12, {25 => 'Christmas'}) }
 
   context "with default configuration" do
     before(:each) { Calorie.config = nil }
@@ -12,7 +12,7 @@ describe Calorie::Calendar do
         subject.weeks.first.each_day do |day|
           numbers << day.number
         end
-        numbers.should eq([nil, nil, nil] + (1..4).to_a)
+        numbers.should eq([nil, nil, nil, nil, nil, nil, 1])
       end
 
       it "dates the days correctly" do
@@ -20,7 +20,7 @@ describe Calorie::Calendar do
         subject.weeks.first.each_day do |day|
           dates << day.date.to_s
         end
-        dates.should eq(["2010-11-28", "2010-11-29", "2010-11-30", "2010-12-01", "2010-12-02", "2010-12-03", "2010-12-04"])
+        dates.should eq(["2007-11-25", "2007-11-26", "2007-11-27", "2007-11-28", "2007-11-29", "2007-11-30", "2007-12-01"])
       end
     end
 
@@ -30,7 +30,7 @@ describe Calorie::Calendar do
         subject.weeks.last.each_day do |day|
           numbers << day.number
         end
-        numbers.should eq((26..31).to_a + [nil])
+        numbers.should eq([30, 31, nil, nil, nil, nil, nil])
       end
 
       it "dates the days correctly" do
@@ -38,7 +38,7 @@ describe Calorie::Calendar do
         subject.weeks.last.each_day do |day|
           dates << day.date.to_s
         end
-        dates.should eq(["2010-12-26", "2010-12-27", "2010-12-28", "2010-12-29", "2010-12-30", "2010-12-31", "2011-01-01"])
+        dates.should eq(["2007-12-30", "2007-12-31", "2008-01-01", "2008-01-02", "2008-01-03", "2008-01-04", "2008-01-05"])
       end
     end
 

@@ -2,23 +2,31 @@ require 'calorie/day'
 require 'calorie/week'
 
 describe Calorie::Week do
-
-  it "loops through the days" do
-    days = [
-      Calorie::NullDay.new,
-      Calorie::NullDay.new,
+  let(:thursday) { Calorie::Day.new(Date.new(2010, 6, 3)) }
+  let(:days) {
+    [
+      Calorie::NullDay.new(Date.new(2010, 5, 29)),
+      Calorie::NullDay.new(Date.new(2010, 5, 31)),
       Calorie::Day.new(Date.new(2010, 6, 1)),
       Calorie::Day.new(Date.new(2010, 6, 2)),
-      Calorie::Day.new(Date.new(2010, 6, 3)),
+      thursday,
       Calorie::Day.new(Date.new(2010, 6, 4)),
       Calorie::Day.new(Date.new(2010, 6, 5)),
     ]
+  }
 
+  let(:week) { Calorie::Week.new(days) }
+
+  it "loops through the days" do
     numbers = []
-    Calorie::Week.new(days).each_day do |day|
+    week.each_day do |day|
       numbers << day.number
     end
 
     numbers.should eq([nil, nil, 1, 2, 3, 4, 5])
+  end
+
+  it "can find its Thursday" do
+    week.thursday.should eq(thursday)
   end
 end
