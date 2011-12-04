@@ -5,8 +5,8 @@ describe Calorie::Week do
 
   it "loops through the days" do
     days = [
-      Calorie::Day.new,
-      Calorie::Day.new,
+      Calorie::NullDay.new,
+      Calorie::NullDay.new,
       Calorie::Day.new(Date.new(2010, 6, 1), "the first"),
       Calorie::Day.new(Date.new(2010, 6, 2), "the second"),
       Calorie::Day.new(Date.new(2010, 6, 3), "the third"),

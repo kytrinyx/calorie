@@ -6,21 +6,42 @@ describe Calorie::Calendar do
   context "with default configuration" do
     before(:each) { Calorie.config = nil }
 
-    it "gets the first week right" do
-      numbers = []
-      subject.weeks.first.each_day do |day|
-        numbers << day.number
+    context "in the first week" do
+      it "numbers the days correctly" do
+        numbers = []
+        subject.weeks.first.each_day do |day|
+          numbers << day.number
+        end
+        numbers.should eq([nil, nil, nil] + (1..4).to_a)
       end
-      numbers.should eq([nil, nil, nil] + (1..4).to_a)
+
+      it "dates the days correctly" do
+        dates = []
+        subject.weeks.first.each_day do |day|
+          dates << day.date.to_s
+        end
+        dates.should eq(["2010-11-28", "2010-11-29", "2010-11-30", "2010-12-01", "2010-12-02", "2010-12-03", "2010-12-04"])
+      end
     end
 
-    it "gets the last week right" do
-      numbers = []
-      subject.weeks.last.each_day do |day|
-        numbers << day.number
+    context "in the last week" do
+      it "numbers the days correctly" do
+        numbers = []
+        subject.weeks.last.each_day do |day|
+          numbers << day.number
+        end
+        numbers.should eq((26..31).to_a + [nil])
       end
-      numbers.should eq((26..31).to_a + [nil])
+
+      it "dates the days correctly" do
+        dates = []
+        subject.weeks.last.each_day do |day|
+          dates << day.date.to_s
+        end
+        dates.should eq(["2010-12-26", "2010-12-27", "2010-12-28", "2010-12-29", "2010-12-30", "2010-12-31", "2011-01-01"])
+      end
     end
+
   end
 
   it "creates all the days" do

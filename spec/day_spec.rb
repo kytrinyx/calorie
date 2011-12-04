@@ -44,14 +44,6 @@ describe Calorie::Day do
     its(:weekend?) { should be_false }
     its(:blank?) { should be_false}
   end
-
-  context "a null day" do
-    subject { Calorie::Day.new }
-    its(:blank?) { should be_true }
-    its(:number) { should be_nil }
-    its(:weekend?) { should be_false }
-    its(:data) { should be_nil }
-  end
 end
 
 describe Calorie::NullDay do

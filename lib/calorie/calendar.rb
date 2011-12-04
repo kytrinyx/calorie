@@ -53,8 +53,12 @@ module Calorie
     def days_for_slicing
       slices = days.clone
 
-      blank_days_at_start.times { slices.unshift(Calorie::Day.new) }
-      blank_days_at_end.times { slices.push(Calorie::Day.new) }
+      (1..blank_days_at_start).each do |i|
+        slices.unshift(Calorie::NullDay.new(first_day - i))
+      end
+      (1..blank_days_at_end).each do |i|
+        slices.push(Calorie::NullDay.new(last_day + i))
+      end
 
       slices
     end

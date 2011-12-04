@@ -3,11 +3,7 @@ module Calorie
 
     attr_reader :date
     def initialize(date = nil, data = nil)
-      if date
-        @date = date
-      else
-        @date = NullDay.new
-      end
+      @date = date
       @data = data
     end
 
@@ -47,6 +43,9 @@ module Calorie
     end
 
     def mday
+    end
+
+    def number
     end
   end
 end
