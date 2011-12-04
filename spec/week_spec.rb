@@ -7,11 +7,11 @@ describe Calorie::Week do
     days = [
       Calorie::NullDay.new,
       Calorie::NullDay.new,
-      Calorie::Day.new(Date.new(2010, 6, 1), "the first"),
-      Calorie::Day.new(Date.new(2010, 6, 2), "the second"),
-      Calorie::Day.new(Date.new(2010, 6, 3), "the third"),
-      Calorie::Day.new(Date.new(2010, 6, 4), "the fourth"),
-      Calorie::Day.new(Date.new(2010, 6, 5), "the fifth"),
+      Calorie::Day.new(Date.new(2010, 6, 1)),
+      Calorie::Day.new(Date.new(2010, 6, 2)),
+      Calorie::Day.new(Date.new(2010, 6, 3)),
+      Calorie::Day.new(Date.new(2010, 6, 4)),
+      Calorie::Day.new(Date.new(2010, 6, 5)),
     ]
 
     numbers = []
