@@ -88,21 +88,15 @@ module Calorie
     end
 
     def previous
-      date = first_day.prev_month
-      the_month = I18n.translate('calorie.months')[date.month-1]
-      "#{the_month} #{date.year}"
+      Calorie.label_for(first_day.prev_month)
     end
 
     def current
-      date = first_day
-      the_month = I18n.translate('calorie.months')[date.month-1]
-      "#{the_month} #{date.year}"
+      Calorie.label_for(first_day)
     end
 
     def next
-      date = first_day.next_month
-      the_month = I18n.translate('calorie.months')[date.month-1]
-      "#{the_month} #{date.year}"
+      Calorie.label_for(first_day.next_month)
     end
   end
 end

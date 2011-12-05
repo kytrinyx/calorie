@@ -44,6 +44,22 @@ module Calorie
     def new(year, month, data = {})
       Calendar.new(year, month, data)
     end
+
+    def day_names
+      @day_names ||= I18n.translate('calorie.days_of_the_week')
+    end
+
+    def month_names
+      @month_names ||= I18n.translate('calorie.months')
+    end
+
+    def month_name(i)
+      month_names[i-1]
+    end
+
+    def label_for(date)
+      "#{Calorie.month_name(date.month)} #{date.year}"
+    end
   end
 
 end
