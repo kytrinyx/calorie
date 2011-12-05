@@ -23,7 +23,7 @@ module Calorie
     end
 
     def days_in_month
-      days.size
+      last_day.mday
     end
 
     def first_day_falls_on
@@ -69,10 +69,6 @@ module Calorie
 
     def blank_days_at_end
       7 - ((blank_days_at_start + days_in_month) % 7)
-    end
-
-    def days_in_month
-      last_day.mday
     end
 
     def each_day(&block)
