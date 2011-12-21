@@ -23,13 +23,13 @@ The data can be anything; only your code will be interacting with it.
         # ... etc
       }
 
-Obviously, you don't need to pass in any data -- if it's easy enough to just loop through and check what day it is and do whatever you need to do in your view, that's up to you.
+Obviously, you don't need to pass in any data -- if it's easy enough to just loop through and check what day it is and do whatever you need to do in your template, that's up to you.
 
-Create a presenter for a month by sending in `year`, `month`, and the data:
+Create a decorator for a month by sending in `year`, `month`, and the data:
 
       cal = Calorie.new(2010, 6, data)
 
-In your view, you can style it however you wish.
+In your template, you can style it however you wish.
 
       # previous month, e.g. December 2009
       cal.previous
