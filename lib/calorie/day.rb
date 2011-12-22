@@ -51,5 +51,8 @@ module Calorie
 
     def number
     end
+
+    def data
+    end
   end
 end

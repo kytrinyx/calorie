@@ -53,4 +53,5 @@ describe Calorie::NullDay do
   its(:mday) { should be_nil }
   its(:sunday?) { should be_false }
   its(:saturday?) { should be_false }
+  its(:data) { should be_nil }
 end
