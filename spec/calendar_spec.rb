@@ -9,7 +9,7 @@ describe Calorie::Calendar do
     context "in the first week" do
       it "numbers the days correctly" do
         numbers = []
-        subject.weeks.first.each_day do |day|
+        subject.weeks.first.days.each do |day|
           numbers << day.number
         end
         numbers.should eq([nil, nil, nil, nil, nil, nil, 1])
@@ -17,7 +17,7 @@ describe Calorie::Calendar do
 
       it "dates the days correctly" do
         dates = []
-        subject.weeks.first.each_day do |day|
+        subject.weeks.first.days.each do |day|
           dates << day.date.to_s
         end
         dates.should eq(["2007-11-25", "2007-11-26", "2007-11-27", "2007-11-28", "2007-11-29", "2007-11-30", "2007-12-01"])
@@ -27,7 +27,7 @@ describe Calorie::Calendar do
     context "in the last week" do
       it "numbers the days correctly" do
         numbers = []
-        subject.weeks.last.each_day do |day|
+        subject.weeks.last.days.each do |day|
           numbers << day.number
         end
         numbers.should eq([30, 31, nil, nil, nil, nil, nil])
@@ -35,7 +35,7 @@ describe Calorie::Calendar do
 
       it "dates the days correctly" do
         dates = []
-        subject.weeks.last.each_day do |day|
+        subject.weeks.last.days.each do |day|
           dates << day.date.to_s
         end
         dates.should eq(["2007-12-30", "2007-12-31", "2008-01-01", "2008-01-02", "2008-01-03", "2008-01-04", "2008-01-05"])
@@ -46,7 +46,7 @@ describe Calorie::Calendar do
 
   it "creates all the days" do
     numbers = []
-    subject.each_day do |day|
+    subject.days.each do |day|
       numbers << day.number
     end
 
@@ -54,7 +54,7 @@ describe Calorie::Calendar do
   end
 
   it "hands out the data" do
-    subject.each_day do |day|
+    subject.days.each do |day|
       if day.number == 25
         day.data.should eq('Christmas')
       end

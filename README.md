@@ -47,7 +47,7 @@ In your template, you can style it however you wish.
 
       cal.weeks.each do |week|
         # week.number
-        week.each_day do |day|
+        week.days.each do |day|
           unless day.blank?
             # the day of the month is day.number
             # do stuff with day.data
@@ -63,7 +63,7 @@ On the other hand, the definition for *week 1* is the week that has the year's f
 
 If you don't need to lay it out by week, you can also iterate straight through the days (though I'm not sure why you'd use Calorie for this):
 
-      cal.each_day do |day|
+      cal.days.each do |day|
         # the day of the month is day.number
         # do stuff with day.data
         if day.today?

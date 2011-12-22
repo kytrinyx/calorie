@@ -6,10 +6,6 @@ module Calorie
       @days = days
     end
 
-    def each_day(&block)
-      days.each {|day| block.call(day) }
-    end
-
     def number
       (thursday.date.yday / 7.0).ceil
     end

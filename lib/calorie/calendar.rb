@@ -29,10 +29,6 @@ module Calorie
       end
     end
 
-    def each_day(&block)
-      days.each {|day| block.call(day) }
-    end
-
     def days_of_the_week
       unless @days_of_the_week
         @days_of_the_week ||= (0..6).map do |i|

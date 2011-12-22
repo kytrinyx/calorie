@@ -19,7 +19,7 @@ describe Calorie::Week do
 
   it "loops through the days" do
     numbers = []
-    week.each_day do |day|
+    week.days.each do |day|
       numbers << day.number
     end
 
