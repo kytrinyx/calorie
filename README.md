@@ -45,7 +45,7 @@ In your template, you can style it however you wish.
         # day.weekend?
       end
 
-      cal.each_week do |week|
+      cal.weeks.each do |week|
         # week.number
         week.each_day do |day|
           unless day.blank?
