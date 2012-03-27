@@ -7,50 +7,53 @@ module Calorie
       @data = data
       @year = year
       @month = month
-      initialize_days
-      @weeks = WeeksInMonth.new(days).weeks
     end
 
+    def days
+      @days ||= each_day.map { |i| day(i) }
+    end
+
+    def weeks
+      @weeks ||= WeeksInMonth.new(days)
+    end
+
+    def days_of_the_week
+      @days_of_the_week ||= DaysOfTheWeek.new
+    end
+
+    def previous
+      label_for(first_day.prev_month)
+    end
+
+    def current
+      label_for(first_day)
+    end
+
+    def next
+      label_for(first_day.next_month)
+    end
+
+    private
     def first_day
       @first_day ||= Date.new(year, month, 1)
-      @first_day
     end
 
     def last_day
       @last_day ||= first_day.next_month.prev_day
-      @last_day
     end
 
-    def initialize_days
-      @days = []
-      (first_day.mday..last_day.mday).map do |i|
-        date = Date.new(year, month, i)
-        @days << Calorie::Day.new(date, data[i])
-      end
+    def each_day
+      (first_day.mday..last_day.mday).to_a
     end
 
-    def days_of_the_week
-      unless @days_of_the_week
-        @days_of_the_week ||= (0..6).map do |i|
-          DayOfTheWeek.new(i)
-        end
-        if Calorie.configuration.week_starts_on? :monday
-          @days_of_the_week.push(@days_of_the_week.shift)
-        end
-      end
-      @days_of_the_week
+    def label_for(date)
+      "#{Calorie.month_name(date.month)} #{date.year}"
     end
 
-    def previous
-      Calorie.label_for(first_day.prev_month)
+    def day(i)
+      date = Date.new(year, month, i)
+      Calorie::Day.new(date, data[i])
     end
 
-    def current
-      Calorie.label_for(first_day)
-    end
-
-    def next
-      Calorie.label_for(first_day.next_month)
-    end
   end
 end

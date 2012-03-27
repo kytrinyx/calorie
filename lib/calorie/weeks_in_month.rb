@@ -1,20 +1,36 @@
 module Calorie
+
   class WeeksInMonth
+    include Enumerable
+
+    attr_reader :source_days
     def initialize(days = [])
       @source_days = days
     end
 
-    def weeks
-      result = []
-      padded_days = days_for_slicing
-      number_of_weeks.times do
-        result << Calorie::Week.new(padded_days.slice!(0..6))
+    def each
+      weeks.each do |week|
+        yield week
       end
-      result
+    end
+
+    def last
+      weeks.last
+    end
+
+    def weeks
+      unless @weeks
+        @weeks = []
+        padded_days = days_for_slicing
+        number_of_weeks.times do
+          @weeks << Calorie::Week.new(padded_days.slice!(0..6))
+        end
+      end
+      @weeks
     end
 
     def days_for_slicing
-      slices = @source_days.clone
+      slices = source_days.clone
 
       (1..blank_days_at_start).each do |i|
         slices.unshift(Calorie::NullDay.new(first_day - i))
@@ -39,15 +55,15 @@ module Calorie
     end
 
     def days_in_month
-      @source_days.length
+      source_days.length
     end
 
     def first_day
-      @source_days.first.date
+      source_days.first.date
     end
 
     def last_day
-      @source_days.last.date
+      source_days.last.date
     end
 
     def first_day_falls_on
@@ -58,4 +74,5 @@ module Calorie
       end
     end
   end
+
 end

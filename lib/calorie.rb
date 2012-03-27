@@ -4,6 +4,7 @@ require 'date'
 require 'i18n'
 
 require 'calorie/weeks_in_month'
+require 'calorie/days_of_the_week'
 require 'calorie/day_of_the_week'
 require 'calorie/calendar'
 require 'calorie/week'
@@ -55,10 +56,6 @@ module Calorie
 
     def month_name(i)
       month_names[i-1]
-    end
-
-    def label_for(date)
-      "#{Calorie.month_name(date.month)} #{date.year}"
     end
   end
 
