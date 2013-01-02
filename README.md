@@ -2,11 +2,20 @@
 
 A calendar is a calendar is a calendar.
 
+This library abstracts away the fiddly logic for displaying a month-like calendar view.
+It's a presenter, I guess.
+
+## Motivation
+
+The third time I found myself writing complicated view code to display a month-like calendar view I decided to
+go find a library that would abstract this away... and all the libraries I found contained a bunch of
+html and css stuff (and also depended on Rails), which was a bit more than I wanted.
+
+So I re-invented another wheel (but made it really, really small).
+
 ## Requirements
 
 This uses the ruby core `Date` library.
-
-In other words, rails is *not* required.
 
 ## Usage
 
@@ -50,7 +59,9 @@ In your template, you can style it however you wish.
         week.days.each do |day|
           unless day.blank?
             # the day of the month is day.number
-            # do stuff with day.data
+            # do stuff with day.data, which is
+            # whatever you happened to put into the
+            # data hash
             if day.today?
               # omg, it's RIGHT NOW
             end
