@@ -15,7 +15,7 @@ So I re-invented another wheel (but made it really, really small).
 
 ## Requirements
 
-This uses the ruby core `Date` library.
+This uses `Date` from the Ruby Standard Library.
 
 ## Usage
 
