@@ -23,10 +23,10 @@ describe Calorie::Week do
       numbers << day.number
     end
 
-    numbers.should eq([nil, nil, 1, 2, 3, 4, 5])
+    expect(numbers).to eq([nil, nil, 1, 2, 3, 4, 5])
   end
 
   it "can find its Thursday" do
-    week.thursday.should eq(thursday)
+    expect(week.thursday).to eq(thursday)
   end
 end

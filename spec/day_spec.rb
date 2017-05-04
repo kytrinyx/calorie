@@ -4,12 +4,12 @@ require 'timecop'
 describe Calorie::Day do
 
   context "during the weekend" do
-    subject { Calorie::Day.new(Date.new(2010, 6, 13), "hello, world") }
+    let(:day) { Calorie::Day.new(Date.new(2010, 6, 13), "hello, world") }
 
-    its(:number) { should eq(13) }
-    its(:data) { should eq("hello, world") }
-    its(:weekend?) { should be_true }
-    its(:blank?) { should be_false}
+    it { expect(day.number).to eq(13) }
+    it { expect(day.data).to eq("hello, world") }
+    it { expect(day.weekend?).to be true }
+    it { expect(day.blank?).to be false }
 
     context "on that particular day" do
       before :each do
@@ -20,7 +20,7 @@ describe Calorie::Day do
         Timecop.return
       end
 
-      its(:today?) { should be_true }
+      it { expect(day.today?).to be true }
     end
 
     context "on a different day" do
@@ -32,26 +32,27 @@ describe Calorie::Day do
         Timecop.return
       end
 
-      its(:today?) { should be_false }
+      it { expect(day.today?).to be false }
     end
   end
 
   context "midweek" do
-    subject { Calorie::Day.new(Date.new(2010, 6, 17), "so long, folks") }
+    let(:day) { Calorie::Day.new(Date.new(2010, 6, 17), "so long, folks") }
 
-    its(:number) { should eq(17) }
-    its(:data) { should eq("so long, folks") }
-    its(:weekend?) { should be_false }
-    its(:blank?) { should be_false}
+    it { expect(day.number).to eq(17) }
+    it { expect(day.data).to eq("so long, folks") }
+    it { expect(day.weekend?).to be false }
+    it { expect(day.blank?).to be false}
   end
 end
 
 describe Calorie::NullDay do
   let(:jan1) { Date.new(2010, 1, 1) }
-  subject { Calorie::NullDay.new(jan1) }
-  its(:date) { should eq(jan1) }
-  its(:mday) { should be_nil }
-  its(:sunday?) { should be_false }
-  its(:saturday?) { should be_false }
-  its(:data) { should be_nil }
+  let(:day) { Calorie::NullDay.new(jan1) }
+
+  it { expect(day.date).to eq(jan1) }
+  it { expect(day.mday).to be_nil }
+  it { expect(day.sunday?).to be false }
+  it { expect(day.saturday?).to be false }
+  it { expect(day.data).to be_nil }
 end

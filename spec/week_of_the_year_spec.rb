@@ -13,7 +13,7 @@ describe "Week number" do
         end
 
         specify "in #{year}" do
-          Calorie.new(year, 1).weeks.first.number.should eq(week_number)
+          expect(Calorie.new(year, 1).weeks.first.number).to eq(week_number)
         end
       end
     end
@@ -30,7 +30,7 @@ describe "Week number" do
         end
 
         specify "in #{year}" do
-          Calorie.new(year, 1).weeks.first.number.should eq(week_number)
+          expect(Calorie.new(year, 1).weeks.first.number).to eq(week_number)
         end
       end
     end
@@ -46,7 +46,7 @@ describe "Week number" do
         end
 
         specify "in #{year}" do
-          Calorie.new(year, 12).weeks.last.number.should eq(week_number)
+          expect(Calorie.new(year, 12).weeks.last.number).to eq(week_number)
         end
       end
     end
@@ -60,7 +60,7 @@ describe "Week number" do
         end
 
         specify "in #{year}" do
-          Calorie.new(year, 12).weeks.last.number.should eq(week_number)
+          expect(Calorie.new(year, 12).weeks.last.number).to eq(week_number)
         end
       end
     end

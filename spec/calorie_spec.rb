@@ -6,14 +6,14 @@ describe Calorie do
 
     cal.days.each do |day|
       if day.number == 25
-        day.data.should eq('Christmas')
+        expect(day.data).to eq('Christmas')
       end
     end
   end
 
   describe "configuration" do
     it "has a global config" do
-      Calorie.configuration.should eq(Calorie.configuration)
+      expect(Calorie.configuration).to eq(Calorie.configuration)
     end
 
     context "when unconfigured" do
@@ -22,11 +22,11 @@ describe Calorie do
       end
 
       it "starts week on Sunday by default" do
-        Calorie.configuration.week_starts_on.should eq(:sunday)
+        expect(Calorie.configuration.week_starts_on).to eq(:sunday)
       end
 
       it "knows when the week starts" do
-        Calorie.configuration.week_starts_on?(:sunday).should be_true
+        expect(Calorie.configuration.week_starts_on?(:sunday)).to be true
       end
     end
 
@@ -38,11 +38,11 @@ describe Calorie do
       end
 
       it "has the correct start of the week" do
-        Calorie.configuration.week_starts_on.should eq(:monday)
+        expect(Calorie.configuration.week_starts_on).to eq(:monday)
       end
 
       it "knows when the week starts" do
-        Calorie.configuration.week_starts_on?(:monday).should be_true
+        expect(Calorie.configuration.week_starts_on?(:monday)).to be true
       end
     end
   end

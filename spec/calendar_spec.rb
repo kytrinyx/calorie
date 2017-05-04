@@ -12,7 +12,7 @@ describe Calorie::Calendar do
         subject.weeks.first.days.each do |day|
           numbers << day.number
         end
-        numbers.should eq([nil, nil, nil, nil, nil, nil, 1])
+        expect(numbers).to eq([nil, nil, nil, nil, nil, nil, 1])
       end
 
       it "dates the days correctly" do
@@ -20,7 +20,7 @@ describe Calorie::Calendar do
         subject.weeks.first.days.each do |day|
           dates << day.date.to_s
         end
-        dates.should eq(["2007-11-25", "2007-11-26", "2007-11-27", "2007-11-28", "2007-11-29", "2007-11-30", "2007-12-01"])
+        expect(dates).to eq(["2007-11-25", "2007-11-26", "2007-11-27", "2007-11-28", "2007-11-29", "2007-11-30", "2007-12-01"])
       end
     end
 
@@ -30,7 +30,7 @@ describe Calorie::Calendar do
         subject.weeks.last.days.each do |day|
           numbers << day.number
         end
-        numbers.should eq([30, 31, nil, nil, nil, nil, nil])
+        expect(numbers).to eq([30, 31, nil, nil, nil, nil, nil])
       end
 
       it "dates the days correctly" do
@@ -38,7 +38,7 @@ describe Calorie::Calendar do
         subject.weeks.last.days.each do |day|
           dates << day.date.to_s
         end
-        dates.should eq(["2007-12-30", "2007-12-31", "2008-01-01", "2008-01-02", "2008-01-03", "2008-01-04", "2008-01-05"])
+        expect(dates).to eq(["2007-12-30", "2007-12-31", "2008-01-01", "2008-01-02", "2008-01-03", "2008-01-04", "2008-01-05"])
       end
     end
 
@@ -50,13 +50,13 @@ describe Calorie::Calendar do
       numbers << day.number
     end
 
-    numbers.should eq((1..31).to_a)
+    expect(numbers).to eq((1..31).to_a)
   end
 
   it "hands out the data" do
     subject.days.each do |day|
       if day.number == 25
-        day.data.should eq('Christmas')
+        expect(day.data).to eq('Christmas')
       end
     end
   end
@@ -82,14 +82,14 @@ describe Calorie::Calendar do
       context "in january 2010" do
         subject { Calorie::Calendar.new(2010, 1, {}) }
 
-        specify { subject.previous.should eq('dec 2009') }
-        specify { subject.current.should eq('jan 2010') }
+        specify { expect(subject.previous).to eq('dec 2009') }
+        specify { expect(subject.current).to eq('jan 2010') }
       end
 
       context "in december" do
         subject { Calorie::Calendar.new(2010, 12, {}) }
 
-        specify { subject.next.should eq('jan 2011') }
+        specify { expect(subject.next).to eq('jan 2011') }
       end
     end
 
@@ -100,7 +100,7 @@ describe Calorie::Calendar do
       context "with default configuration" do
         before(:each) { Calorie.config = nil }
 
-        specify { subject.days_of_the_week.map(&:label).should eq(%w(dimanche lundi mardi mercredi jeudi vendredi samedi)) }
+        specify { expect(subject.days_of_the_week.map(&:label)).to eq(%w(dimanche lundi mardi mercredi jeudi vendredi samedi)) }
       end
 
       context "with week starting on monday" do
@@ -110,7 +110,7 @@ describe Calorie::Calendar do
           end
         end
 
-        specify { subject.days_of_the_week.map(&:label).should eq(%w(lundi mardi mercredi jeudi vendredi samedi dimanche)) }
+        specify { expect(subject.days_of_the_week.map(&:label)).to eq(%w(lundi mardi mercredi jeudi vendredi samedi dimanche)) }
       end
     end
   end

@@ -13,15 +13,15 @@ describe Calorie::DayOfTheWeek do
   end
 
   it "has a label" do
-    Calorie::DayOfTheWeek.new(0).label.should eq('dimanche')
+    expect(Calorie::DayOfTheWeek.new(0).label).to eq('dimanche')
   end
 
   [0, 6].each do |i|
-    specify { Calorie::DayOfTheWeek.new(i).weekend?.should be_true }
+    specify { expect(Calorie::DayOfTheWeek.new(i).weekend?).to be true }
   end
 
   (1..5).each do |i|
-    specify { Calorie::DayOfTheWeek.new(i).weekend?.should be_false }
+    specify { expect(Calorie::DayOfTheWeek.new(i).weekend?).to be false }
   end
 
 end
