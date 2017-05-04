@@ -10,6 +10,8 @@ require 'calorie/calendar'
 require 'calorie/week'
 require 'calorie/day'
 
+I18n.config.enforce_available_locales = false
+
 module Calorie
 
   class Config
